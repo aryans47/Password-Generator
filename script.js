@@ -11,6 +11,7 @@ let copyIcon = document.getElementById("copyIcon");
 
 // Showing input slider value 
 sliderValue.textContent = inputSlider.value;
+// Updtae Slider value by dragging slider
 inputSlider.addEventListener('input', () => {
     sliderValue.textContent = inputSlider.value;
 });
@@ -48,3 +49,8 @@ function generatePassword() {
 
     return genPassword;
 }
+copyIcon.addEventListner('click', ()=>{
+    if(passBpx.value != "" || passBox.value.length >=1){
+        navigatior.clipboard.writeText(passBox.value);
+    }
+});
