@@ -11,46 +11,53 @@ let copyIcon = document.getElementById("copyIcon");
 
 // Showing input slider value 
 sliderValue.textContent = inputSlider.value;
-// Updtae Slider value by dragging slider
-inputSlider.addEventListener('input', () => {
+inputSlider.addEventListener('input', ()=>{
     sliderValue.textContent = inputSlider.value;
 });
 
-genBtn.addEventListener('click', () => {
+genBtn.addEventListener('click', ()=>{
     passBox.value = generatePassword();
 })
 
 let lowerChars = "abcdefghijklmnopqrstuvwxyz";
 let upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let allNumbers = "0123456789";
-let allSymbols = "~!@#$%^&*";
+let allSymbols = "~!@#$%^&*"; 
 
 // Function to generate Password
-function generatePassword() {
+function generatePassword(){
     let genPassword = "";
     let allChars = "";
 
-    allChars += lowercase.checked ? lowerChars : "";
-    allChars += uppercase.checked ? upperChars : "";
-    allChars += numbers.checked ? allNumbers : "";
-    allChars += symbols.checked ? allSymbols : "";
+    allChars  += lowercase.checked ? lowerChars : "";
+    allChars  += uppercase.checked ? upperChars : "";
+    allChars  += numbers.checked ? allNumbers : "";
+    allChars  += symbols.checked ? allSymbols : "";
 
 
-    if (allChars == "" || allChars.length == 0) {
+    if(allChars == "" || allChars.length == 0){
         return genPassword;
     }
-
+    
 
     let i = 1;
-    while (i <= inputSlider.value) {
+    while(i<=inputSlider.value){
         genPassword += allChars.charAt(Math.floor(Math.random() * allChars.length));
         i++;
     }
 
     return genPassword;
 }
-copyIcon.addEventListner('click', ()=>{
-    if(passBpx.value != "" || passBox.value.length >=1){
-        navigatior.clipboard.writeText(passBox.value);
+
+copyIcon.addEventListener('click', ()=>{
+    if(passBox.value != "" || passBox.value.length >=1){
+        navigator.clipboard.writeText(passBox.value);
+        copyIcon.innerText = "check";
+        copyIcon.title = "Password Copied";
+
+        setTimeout(()=>{
+            copyIcon.innerHTML = "content_copy";
+            copyIcon.title = "";
+        }, 3000)
     }
 });
